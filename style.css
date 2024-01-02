@@ -70,3 +70,7 @@ body {
     background: rgb(68, 75, 149);
     color: rgb(255, 255, 255);
 }
+
+.selected{
+    background: #409c6d;
+}
