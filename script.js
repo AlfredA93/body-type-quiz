@@ -51,12 +51,17 @@ let currentChoice;
 
 function startQuiz() {
   currentQuestionIndex = 0;
-  let hourglassTally = 0;
-  let appleTally = 0;
-  let pearTally = 0;
-  let triangleTally = 0;
-  let currentChoice = "";
+  hourglassTally = 0;
+  appleTally = 0;
+  pearTally = 0;
+  triangleTally = 0;
+  currentChoice = "";
   nextButton.innerHTML = "Next";
+  document.getElementById("hour").innerHTML = hourglassTally;
+  document.getElementById("apple").innerHTML = appleTally;
+  document.getElementById("pear").innerHTML = pearTally;
+  document.getElementById("triangle").innerHTML = triangleTally;
+  document.getElementById("choice").innerHTML = ""
   showQuestion();
 }
 
@@ -83,8 +88,8 @@ function selectAnswer(e) {
   const selectedBtn = e.target;
   selectedBtn.classList.add("selected");
   nextButton.style.display = "block";
-  currentChoice = selectedBtn.getAttribute("id")
-  document.getElementById("choice").innerHTML = currentChoice
+  currentChoice = selectedBtn.getAttribute("id");
+  document.getElementById("choice").innerHTML = currentChoice;
 }
 
 function resetState() {
@@ -94,20 +99,39 @@ function resetState() {
   }
 }
 
+function showScore() {
+  resetState();
+  questionElement.innerHTML = `
+  Here is your breakdown... You're 
+  ${hourglassTally}/4 hourglass, 
+  ${appleTally}/4 apple, 
+  ${pearTally}/4 pear, 
+  ${triangleTally}/4 triangle`;
+  nextButton.innerHTML = "Play Again";
+  nextButton.style.display = "block";
+}
+
 function handleNextButton() {
-    if (currentChoice === "Hourglass") {
-      hourglassTally++;
-      document.getElementById("hour").innerHTML = hourglassTally;
-    } else if (currentChoice === "Apple") {
-      appleTally++;
-      document.getElementById("apple").innerHTML = hourglassTally;
-    } else if (currentChoice === "Pear") {
-      pearTally++;
-      document.getElementById("pear").innerHTML = hourglassTally;
-    } else if (currentChoice === "Triangle") {
-      triangleTally++;
-      document.getElementById("triangle").innerHTML = hourglassTally;
-    }
+  if (currentChoice === "Hourglass") {
+    hourglassTally++;
+    document.getElementById("hour").innerHTML = hourglassTally;
+  } else if (currentChoice === "Apple") {
+    appleTally++;
+    document.getElementById("apple").innerHTML = appleTally;
+  } else if (currentChoice === "Pear") {
+    pearTally++;
+    document.getElementById("pear").innerHTML = pearTally;
+  } else if (currentChoice === "Triangle") {
+    triangleTally++;
+    document.getElementById("triangle").innerHTML = triangleTally;
+  }
+
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
 }
 
 nextButton.addEventListener("click", () => {
