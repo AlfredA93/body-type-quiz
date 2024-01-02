@@ -74,3 +74,14 @@ body {
 .selected{
     background: #409c6d;
 }
+
+.scores{
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-choice{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
