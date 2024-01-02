@@ -63,8 +63,6 @@ body {
   padding: 10px;
   margin: 0 auto;
   cursor: pointer;
-  display: block;
-  transition: all 0.3s;
   display: none;
 }
 
