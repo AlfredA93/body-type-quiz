@@ -47,6 +47,7 @@ let hourglassTally = 0;
 let appleTally = 0;
 let pearTally = 0;
 let triangleTally = 0;
+let currentChoice;
 
 function startQuiz() {
   currentQuestionIndex = 0;
@@ -54,6 +55,7 @@ function startQuiz() {
   let appleTally = 0;
   let pearTally = 0;
   let triangleTally = 0;
+  let currentChoice = "";
   nextButton.innerHTML = "Next";
   showQuestion();
 }
@@ -69,6 +71,7 @@ function showQuestion() {
     button.innerHTML = answer.text;
     button.classList.add("btn");
     answerButtons.appendChild(button);
+    button.setAttribute("id", answer.bodytype);
     button.addEventListener("click", selectAnswer);
   });
 }
@@ -80,6 +83,8 @@ function selectAnswer(e) {
   const selectedBtn = e.target;
   selectedBtn.classList.add("selected");
   nextButton.style.display = "block";
+  currentChoice = selectedBtn.getAttribute("id")
+  document.getElementById("choice").innerHTML = currentChoice
 }
 
 function resetState() {
@@ -88,5 +93,29 @@ function resetState() {
     answerButtons.removeChild(answerButtons.firstChild);
   }
 }
+
+function handleNextButton() {
+    if (currentChoice === "Hourglass") {
+      hourglassTally++;
+      document.getElementById("hour").innerHTML = hourglassTally;
+    } else if (currentChoice === "Apple") {
+      appleTally++;
+      document.getElementById("apple").innerHTML = hourglassTally;
+    } else if (currentChoice === "Pear") {
+      pearTally++;
+      document.getElementById("pear").innerHTML = hourglassTally;
+    } else if (currentChoice === "Triangle") {
+      triangleTally++;
+      document.getElementById("triangle").innerHTML = hourglassTally;
+    }
+}
+
+nextButton.addEventListener("click", () => {
+  if (currentQuestionIndex < questions.length) {
+    handleNextButton();
+  } else {
+    startQuiz();
+  }
+});
 
 startQuiz();
